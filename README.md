@@ -14,10 +14,12 @@ networks_binary: [best1.tar](https://figshare.com/articles/software/best1_tar/12
 
 networks_categories: [best1.tar](https://figshare.com/articles/software/Categories_weights/12906986)
 
-
+```
 python3 app.py
+```
 
 ### Prerequisites
+
 
 See requirements.txt
 
