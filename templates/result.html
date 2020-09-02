@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+	<form class="form-signin" method=post enctype=multipart/form-data>
+		{% if result_binary == "Non-skin"%}
+			<h1 class="h1 mb-3 font-weight-normal"> Non-skin image uploaded.</h1>
+		{% else %}
+			<h1 class="h1 mb-3 font-weight-normal"> Disease: {{ result_categories}}</h5>
+				<table align="center">
+				{% for t in table %}
+				    <tr>
+				    {% for i in t %}
+				        <td>{{ i }}</td>
+				    {% endfor %}
+				    </tr>
+				{% endfor %}
+				 </table>
+		{% endif %}
+		<div class="row">
+			<div class="col-sm-4 align-self-center"><img src="/static/pt.png" alt="" width="60"></div>
+			<div class="col-sm-4 align-self-center"><img src="/static/flask.png" alt="" width="90"></div>
+			<div class="col-sm-4 align-self-center"><img src="/static/bs.png" alt="" width="50"></div>
+		</div>
+	</form>
+{% endblock %}
