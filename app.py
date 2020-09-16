@@ -12,7 +12,7 @@ from flask import Flask, jsonify, request, render_template
 from PIL import Image
 from networks_binary.vgg16_ft import vgg16_ft
 from networks_categories.vgg16_1_one_more_linear_layer import vgg16_1_one_more_linear_layer
-from networks_categories.utils import masked_log_softmax
+from networks_categories.utils import masked_softmax
 
 app = Flask(__name__)
 
@@ -56,8 +56,8 @@ def get_prediction_binary(image_bytes):
 def get_prediction_categories(image_bytes):
 	tensor = transform_image(image_bytes=image_bytes)
 	outputs = model_categories.forward(tensor) # this are all probs
-	outputs = masked_log_softmax(vector=outputs, mask=[1, 50, 69, 73, 139, 222, 235, 253, 257, 296], dim=1) # categories to mask out
-	outputs = torch.nn.functional.softmax(outputs,dim=1)  # this are probs normalized
+	outputs = masked_softmax(vector=outputs, mask=[1, 50, 69, 73, 139, 222, 235, 253, 257, 296], dim=1) # categories to mask out
+	#outputs = torch.nn.functional.softmax(outputs,dim=1)  # this are probs normalized
 	all_probs = list(outputs.data.numpy().flatten())
 	prob, pred = torch.max(outputs, 1)  # this is the result prob and result pred just 1
 	pred_idx = str(pred.item())
